@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.region
+}
+
 resource "aws_sqs_queue" "sh_queue" {
   name                       = "update-pagamento-status"
   delay_seconds              = 10
