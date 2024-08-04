@@ -33,6 +33,6 @@ data "aws_iam_policy_document" "sh_sqs_policy" {
 }
 
 resource "aws_sqs_queue_policy" "sh_sqs_policy" {
-  queue_url = aws_sqs_queue.pagamento-confimado-sh_queue.id
+  queue_url = aws_sqs_queue.pagamento-confirmado-sh_queue.id
   policy    = data.aws_iam_policy_document.sh_sqs_policy.json
 }
