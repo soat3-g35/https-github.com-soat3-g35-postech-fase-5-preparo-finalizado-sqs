@@ -2,8 +2,8 @@ provider "aws" {
   region = var.region
 }
 
-resource "aws_sqs_queue" "preparo-iniciado-sh_queue" {
-  name                       = "preparo-iniciado"
+resource "aws_sqs_queue" "preparo-finalizado-sh_queue" {
+  name                       = "preparo-finalizado"
   delay_seconds              = 10
   visibility_timeout_seconds = 30
   max_message_size           = 2048
@@ -27,12 +27,12 @@ data "aws_iam_policy_document" "sh_sqs_policy" {
       "sqs:ReceiveMessage"
     ]
     resources = [
-      aws_sqs_queue.preparo-iniciado-sh_queue.arn
+      aws_sqs_queue.preparo-finalizado-sh_queue.arn
     ]
   }
 }
 
 resource "aws_sqs_queue_policy" "sh_sqs_policy" {
-  queue_url = aws_sqs_queue.preparo-iniciado-sh_queue.id
+  queue_url = aws_sqs_queue.preparo-finalizado-sh_queue.id
   policy    = data.aws_iam_policy_document.sh_sqs_policy.json
 }
